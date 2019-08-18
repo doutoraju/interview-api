@@ -33,8 +33,6 @@ public class Professional{
 	private String city;
 	@Enumerated(EnumType.STRING)
 	private State state;
-	
-	
 
 	public Long getIdProfessional() {
 		return idProfessional;
@@ -84,6 +82,7 @@ public class Professional{
 	public void setState(State state) {
 		this.state = state;
 	}
+
 	@Override
 	public String toString() {
 		return "Professional [idProfessional=" + idProfessional + ", phone=" + phone + ", name=" + name

@@ -20,8 +20,9 @@ public class ProfessionalDTO {
 	@NotEmpty(message = "An email should be provided")
 	@Email(message = "Please enter a valid email")
 	private String email;
-		private String city;
+	private String city;
 	private State state;
+
 	public Long getIdProfessional() {
 		return idProfessional;
 	}
@@ -70,7 +71,4 @@ public class ProfessionalDTO {
 	public void setState(State state) {
 		this.state = state;
 	}
-	
-	
-	
 }

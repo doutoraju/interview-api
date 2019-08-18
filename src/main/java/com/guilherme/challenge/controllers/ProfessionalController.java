@@ -22,8 +22,7 @@ import com.guilherme.challenge.services.ProfessionalService;
 @RestController
 @RequestMapping("/api/professionals")
 public class ProfessionalController {
-	
-	
+
 	@Autowired
 	public ProfessionalService professionalService;
 	
@@ -131,9 +130,5 @@ public class ProfessionalController {
 		
 		return tempProfessional;
 	}
-	
-	
-	
-	
 	
 }

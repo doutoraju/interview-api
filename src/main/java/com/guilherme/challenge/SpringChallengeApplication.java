@@ -29,7 +29,6 @@ public class SpringChallengeApplication {
 		return args -> {
 			for (int i = 0; i < 10; i++) {
 				Professional p = new Professional();
-				
 				p.setName("Guilherme " +i);
 				p.setBirthday(new Date());
 				p.setEmail("guil"+i+"@maciel.com");
@@ -37,11 +36,9 @@ public class SpringChallengeApplication {
 				
 				repo.save(p);
 				
-				
 			}
 			
 			Professional p= repo.findByName("Guilherme 1");
-			
 			
 			p.setPhone("+55 41 992143637");
 			repo.save(p);
@@ -49,7 +46,6 @@ public class SpringChallengeApplication {
 			System.out.println("#########################Professional:#################################");
 			lista.forEach(System.out::println);
 		};
-		
 	}
 	
 }

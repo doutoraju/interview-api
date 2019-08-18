@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.guilherme</groupId>
 	<artifactId>spring-challenge</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-challenge</name>
-	<description>Spring Boot Challenge</description>
+	<version>1.0.0</version>
+	<name>interview-api</name>
+	<description>API for tech interview feedback</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -38,16 +38,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
 		<dependency>
     		<groupId>org.springframework.boot</groupId>
     		<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
-				
 	</dependencies>
-
-
-
 
 	<build>
 		<plugins>
