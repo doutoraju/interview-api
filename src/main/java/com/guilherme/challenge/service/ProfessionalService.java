@@ -1,12 +1,10 @@
-package com.guilherme.challenge.services;
+package com.guilherme.challenge.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.guilherme.challenge.dtos.ProfessionalDTO;
 import com.guilherme.challenge.entities.Professional;
 import com.guilherme.challenge.repositories.ProfessionalRepository;
 
