@@ -3,20 +3,10 @@ package com.guilherme.challenge.responses;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Response<T> {
-
+public class ApiError {
 	
-	private T data;
 	private List<String> errors;
-	
-	
-	public T getData() {
-		return data;
-	}
-	
-	public void setData(T data) {
-		this.data = data;
-	}
+	private String exceptionDetails;
 	
 	public List<String> getErrors() {
 		if(this.errors == null) {
@@ -24,12 +14,16 @@ public class Response<T> {
 		}
 		return errors;
 	}
+
+	public String getExceptionDetails() {
+		return exceptionDetails;
+	}
+
+	public void setExceptionDetails(String data) {
+		this.exceptionDetails = data;
+	}
 	
 	public void setErrors(List<String> errors) {
 		this.errors = errors;
 	}
-
-	
-	
-	
 }
