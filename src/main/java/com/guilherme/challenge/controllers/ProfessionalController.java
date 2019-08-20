@@ -30,8 +30,7 @@ public class ProfessionalController {
     @GetMapping(value = "/")
     public ResponseEntity<List<ProfessionalDTO>> listAllProfessionals() {
         List<ProfessionalDTO> dtos = new ArrayList<>();
-        List<Professional>  resultEntities = professionalService.findAllProfessional();
-        resultEntities.forEach(p -> dtos.add(converter.convertToDTO(p)));
+        professionalService.findAllProfessional().forEach(p -> dtos.add(converter.convertToDTO(p)));
         return ResponseEntity.ok(dtos);
     }
 
