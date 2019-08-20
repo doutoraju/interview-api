@@ -1,8 +1,9 @@
 package com.guilherme.challenge.controllers;
 
-import javax.validation.Valid;
-
+import com.guilherme.challenge.dtos.ProfessionalDTO;
+import com.guilherme.challenge.entities.Professional;
 import com.guilherme.challenge.exception.APIException;
+import com.guilherme.challenge.service.ProfessionalService;
 import com.guilherme.challenge.util.ProfessionalDTOConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +12,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import com.guilherme.challenge.dtos.ProfessionalDTO;
-import com.guilherme.challenge.entities.Professional;
-import com.guilherme.challenge.service.ProfessionalService;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/professionals")
@@ -24,7 +23,6 @@ public class ProfessionalController {
 
     @Autowired
     private ProfessionalDTOConverter converter;
-
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProfessionalDTO> findProfessionalById(@PathVariable("id") String id) {
@@ -38,7 +36,6 @@ public class ProfessionalController {
         }
     }
 
-
     @PostMapping
     public ResponseEntity<ProfessionalDTO> saveProfessional(
             @Valid @RequestBody ProfessionalDTO professionalDTO, BindingResult result) throws APIException {
@@ -49,7 +46,6 @@ public class ProfessionalController {
                 professionalService.saveProfessional(converter.convertToEntity(professionalDTO)));
         return ResponseEntity.ok(professionalReturned);
     }
-
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deleteProfessional(@PathVariable("id") String id) {

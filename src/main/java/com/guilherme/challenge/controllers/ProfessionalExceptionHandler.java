@@ -56,7 +56,7 @@ public class ProfessionalExceptionHandler extends ResponseEntityExceptionHandler
         if(bindingResult != null && bindingResult.getAllErrors() != null)
             ex.getBindingResult().getAllErrors().forEach(error -> apiError.getErrors().add(error.getDefaultMessage()));
         apiError.setExceptionDetails(ex.getMessage());
-        return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
     }
 
 }
