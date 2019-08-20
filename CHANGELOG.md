@@ -9,6 +9,8 @@ Possible sections under each version release are "Added", "Changed", "Removed"
 ## [Unreleased]
 -Part 2 and 3 from Spring Challenge.
 
+## [1.0.2] - 2019-08-20
+Add endpoint do list all professionals
 ## [1.0.1] - 2019-08-19
 Small corrections and improvements from Victor Vieira
 ## [1.0.0] - 2019-08-18

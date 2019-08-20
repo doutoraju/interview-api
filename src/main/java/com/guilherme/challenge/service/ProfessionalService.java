@@ -1,5 +1,6 @@
 package com.guilherme.challenge.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,20 @@ public class ProfessionalService {
 		
 		if(professionalOpt.isPresent()) {
 			Professional p = professionalOpt.get();
-			
 			return p;
-			
 		}
 		return null;
 	}
+
+	public List<Professional> findAllProfessional() {
+		return professionalRepository.findAll();
+	}
 	
 	public Professional saveProfessional(Professional professional) {
-		
 		return professionalRepository.save(professional);
 	}
 	
 	public void deleteProfessionalById(Long id) {
-		
 		professionalRepository.deleteById(id);
 	}
 	
