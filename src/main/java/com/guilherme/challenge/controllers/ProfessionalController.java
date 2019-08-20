@@ -13,6 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/professionals")
@@ -23,6 +26,14 @@ public class ProfessionalController {
 
     @Autowired
     private ProfessionalDTOConverter converter;
+
+    @GetMapping(value = "/")
+    public ResponseEntity<List<ProfessionalDTO>> listAllProfessionals() {
+        List<ProfessionalDTO> dtos = new ArrayList<>();
+        List<Professional>  resultEntities = professionalService.findAllProfessional();
+        resultEntities.forEach(p -> dtos.add(converter.convertToDTO(p)));
+        return ResponseEntity.ok(dtos);
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ProfessionalDTO> findProfessionalById(@PathVariable("id") String id) {
