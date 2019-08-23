@@ -29,7 +29,6 @@ import com.guilherme.challenge.util.InterviewDTOConverter;
 @RequestMapping("/api/interviews")
 public class InterviewController {
 	
-	
 	@Autowired
 	private InterviewService interviewService;
 	
@@ -37,18 +36,14 @@ public class InterviewController {
 	
 	@GetMapping(value = "") 
 	  public ResponseEntity<List<InterviewDTO>>  findInterview() {
-		//Response<List<InterviewDTO>> response = new Response<List<InterviewDTO>>();
 		List<InterviewDTO> interviewDTOList = new ArrayList<InterviewDTO>();
 		interviewService.findAll().forEach(interview -> interviewDTOList.add(converter.convertToDTO(interview)));
-		//response.setData(interviewDTOList);
 		return ResponseEntity.ok(interviewDTOList);
 		
 	  }
 	
 	  @GetMapping(value = "/{id}") 
 	  public ResponseEntity<InterviewDTO>  findInterviewById(@PathVariable("id") String id) {
-		  //Response<InterviewDTO> response = new Response<InterviewDTO>();
-		  
 		  long idInterview  = Long.valueOf(id);  
 		   
 		  Interview i = interviewService.findInterviewByID(idInterview);
@@ -62,7 +57,6 @@ public class InterviewController {
 		  }
 	  
 	  }
-	 
 
 	@PostMapping
 	public ResponseEntity<InterviewDTO> saveInterview(@Valid @RequestBody InterviewDTO interviewDTO, BindingResult result) throws APIException{
@@ -73,27 +67,21 @@ public class InterviewController {
 		}
 		InterviewDTO interviewReturned = converter.convertToDTO(interviewService.saveInterview(converter.convertToEntity(interviewDTO)));
 		
-	//		
 		return ResponseEntity.ok(interviewReturned);
 	}
 	
 
 	@PutMapping
 	public ResponseEntity<InterviewDTO> updateInterview(@Valid @RequestBody InterviewDTO interviewDTO, BindingResult result) throws APIException{
-		//Response<InterviewDTO> response = new Response<InterviewDTO>();
-		
 		if(result.hasErrors()) {
 			throw new APIException("Validation Error found", new BindException(result));
 		}else if (!interviewService.existsById(interviewDTO.getIdInterview())){
 			
-			throw new APIException("No Interview was found with the given ID, if you want to save a new professional, try using the POST method", new BindException(result));
+			throw new APIException("No Interview was found with the given ID, if you want to save a new Interview, try using the POST method", new BindException(result));
 		}
 		InterviewDTO interviewReturned = converter.convertToDTO(interviewService.saveInterview(converter.convertToEntity(interviewDTO)));
-		
-	//		
 		return ResponseEntity.ok(interviewReturned);
 	}
-	
 	
 	  @DeleteMapping(value = "/{id}") 
 	  public ResponseEntity<InterviewDTO>  deleteInterview(@PathVariable("id") String id) {
@@ -103,9 +91,4 @@ public class InterviewController {
 		  return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			
 	  }
-	
-	
-
-	
-	
 }

@@ -23,7 +23,6 @@ public class InterviewService {
 		return interviewRepository.findAll();
 	}
 	
-	
 	public Interview findInterviewByID(Long id) {
 		Optional<Interview> interviewOpt = interviewRepository.findById(id);
 		

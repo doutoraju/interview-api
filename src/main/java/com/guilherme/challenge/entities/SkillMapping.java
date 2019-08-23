@@ -81,7 +81,4 @@ public class SkillMapping implements Serializable{
 		return "SkillMapping [idSkillMapping=" + idSkillMapping + ", interview=" + interview + ", skill=" + skill
 				+ ", briefDescription=" + briefDescription + ", rate=" + rate + "]";
 	}
-	
-	
-	
 }

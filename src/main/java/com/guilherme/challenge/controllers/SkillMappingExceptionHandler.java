@@ -61,16 +61,7 @@ public class SkillMappingExceptionHandler extends ResponseEntityExceptionHandler
 		apiError.getErrors().add("There is already a combination of Skill and Interview saved with the details provided, try using the PUT method to update it.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	/*
-	@ExceptionHandler(DataIntegrityViolationException.class)
-	protected ResponseEntity<ApiError> handleDataIntegrityViolationException(DataIntegrityViolationException ex){
-		ApiError apiError = new ApiError();
-		apiError.setExceptionDetails(ex.getMessage());
-		apiError.getErrors().add("There is already a combination of Skill and Interview saved with the details provided, try using the PUT method to update it.");
-		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
-	}
-	
-	*/
+
 	@ExceptionHandler(Exception.class)
 	protected ResponseEntity<ApiError> handleAllExceptions(Exception ex){
 		ApiError apiError = new ApiError();

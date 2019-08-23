@@ -53,25 +53,17 @@ public class SkillController {
 			  return new ResponseEntity<>(converter.convertToDTO(s), HttpStatus.OK);
 		  }else {
 			  throw new IllegalArgumentException("No Skill was found with this ID.");
-			  
 		  }
-	  
 	  }
 	 
-
 	@PostMapping
 	public ResponseEntity<SkillDTO> saveSkill(@Valid @RequestBody SkillDTO skillDTO, BindingResult result) throws APIException{
-		
 		if(result.hasErrors()) {
 			throw new APIException("Validation error found", new BindException(result)) ;
 		}
-		
 		SkillDTO skillReturned =  converter.convertToDTO(skillService.saveSkill(converter.convertToEntity(skillDTO)));
-		
-		
 		return ResponseEntity.ok(skillReturned);
 	}
-	
 	
 	@PutMapping
 	public ResponseEntity<SkillDTO> updateSkill(@Valid @RequestBody SkillDTO skillDTO, BindingResult result) throws APIException{
@@ -79,32 +71,17 @@ public class SkillController {
 			result.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
 			throw new APIException("Validation error found", new BindException(result)) ;
 		}else if (!skillService.existsById(skillDTO.getIdSkill())){
-			
-			throw new APIException("No Skill was found with the given ID, if you want to save a new professional, try using the POST method", new BindException(result));
+			throw new APIException("No Skill was found with the given ID, if you want to save a new Skill, try using the POST method", new BindException(result));
 		}
 		
 		SkillDTO skillReturned =  converter.convertToDTO(skillService.saveSkill(converter.convertToEntity(skillDTO)));
-		
-		
 		return ResponseEntity.ok(skillReturned);
 	}
-	
-	
-	
-	  @DeleteMapping(value = "/{id}") 
-	  public ResponseEntity<SkillDTO>  deleteSkill(@PathVariable("id") String id) {
+	@DeleteMapping(value = "/{id}") 
+	public ResponseEntity<SkillDTO>  deleteSkill(@PathVariable("id") String id) {
 		  
-		  long idSkill = Long.valueOf(id);  
-		  skillService.deleteSkillById(idSkill);
-		  return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	  }
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		long idSkill = Long.valueOf(id);  
+		skillService.deleteSkillById(idSkill);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
 }

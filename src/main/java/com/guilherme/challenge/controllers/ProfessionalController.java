@@ -29,7 +29,6 @@ import com.guilherme.challenge.util.ProfessionalDTOConverter;
 @RequestMapping("/api/professionals")
 public class ProfessionalController {
 	
-	
 	@Autowired
 	private ProfessionalService professionalService;
 	
@@ -50,7 +49,6 @@ public class ProfessionalController {
 		  Professional p = professionalService.findProfessionalByID(idProfessional);
 		  
 		  if( p != null) {
-			//  response.setData(convertToDTO(p));
 			  return new ResponseEntity<>(converter.convertToDTO(p), HttpStatus.OK);
 		  }else {
 			  throw new IllegalArgumentException("No professional was found with this ID");
@@ -58,10 +56,8 @@ public class ProfessionalController {
 	  
 	  }
 	 
-	  
 	@PostMapping
 	public ResponseEntity<ProfessionalDTO> saveProfessional(@Valid @RequestBody ProfessionalDTO professionalDTO, BindingResult result) throws APIException {
-		
 		
 		if(result.hasErrors()) {
 			throw new APIException("Validation error found", new BindException(result));
@@ -69,7 +65,6 @@ public class ProfessionalController {
 		ProfessionalDTO professionalReturned  = converter.convertToDTO(professionalService.saveProfessional(converter.convertToEntity(professionalDTO)));
 		return ResponseEntity.ok(professionalReturned);
 	}
-	
 	
 	@PutMapping
 	public ResponseEntity<ProfessionalDTO> updateProfessional(@Valid @RequestBody ProfessionalDTO professionalDTO, BindingResult result) throws APIException{
@@ -84,7 +79,6 @@ public class ProfessionalController {
 		return ResponseEntity.ok(professionalReturned);
 	}
 	
-	
 	  @DeleteMapping(value = "/{id}") 
 	  public ResponseEntity<ProfessionalDTO>  deleteProfessional(@PathVariable("id") String id) {
 		  
@@ -93,4 +87,3 @@ public class ProfessionalController {
 		  return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	  }		 
 }
-	

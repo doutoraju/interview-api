@@ -20,14 +20,11 @@ public class SkillMappingService {
 	public List<SkillMapping> findAll(){
 		
 		return skillMappingRepository.findAll();
-		
-		
 	}
 	
 	
 	public SkillMapping findSkillMappingByID(long skillMappingID) {
 		Optional<SkillMapping> skillMappingOpt = skillMappingRepository.findById(skillMappingID);
-		
 		if(skillMappingOpt.isPresent()) {
 			SkillMapping sm = skillMappingOpt.get();
 			
@@ -38,42 +35,25 @@ public class SkillMappingService {
 	}
 	
 	public List<SkillMapping> findSkillMappingByInterview(Interview interviewId) {
-/*		List<SkillMapping> skillMappingOpt = 
-		
-		if(skillMappingOpt.isPresent()) {
-			SkillMapping sm = skillMappingOpt.get();*/
-			
 			return skillMappingRepository.findAllByInterview(interviewId);
-			
-		
 	}
 	
 	public List<SkillMapping> findSkillMappingBySkill(Skill skillId) {
-		/*		List<SkillMapping> skillMappingOpt = 
-				
-				if(skillMappingOpt.isPresent()) {
-					SkillMapping sm = skillMappingOpt.get();*/
-					
-					return skillMappingRepository.findAllBySkill(skillId);
-					
-				
-			}
+		return skillMappingRepository.findAllBySkill(skillId);
+	}
 	
 	
 	public SkillMapping saveSkillMapping(SkillMapping skillMapping) {
-		
 		return skillMappingRepository.save(skillMapping);
 	}
 	
 	public void deleteSkillById(long id) {
-		
 		skillMappingRepository.deleteById(id);
 	}
 	
 	
 	public SkillMapping findSkillMappingByInterviewAndSkill(Interview interview, Skill skill) {
 		SkillMapping skillMapping = skillMappingRepository.findSkillMappingByInterviewAndSkill(interview, skill);
-			
 			return skillMapping;
 			
 	}
@@ -82,7 +62,6 @@ public class SkillMappingService {
 	
 	
 	public boolean existsById(long id) {
-		
 		return skillMappingRepository.existsById(id);
 	}
 	
@@ -90,11 +69,7 @@ public class SkillMappingService {
 		SkillMapping skillMapping = skillMappingRepository.findSkillMappingByInterviewAndSkill(interview, skill);
 		System.out.println(skillMapping);
 			
-			return skillMapping != null;
+		return skillMapping != null;
 			
 	}
-	
-	
-	/*
-	*/
 }

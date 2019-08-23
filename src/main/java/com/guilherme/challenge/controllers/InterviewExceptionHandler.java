@@ -13,9 +13,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.guilherme.challenge.exception.APIException;
 import com.guilherme.challenge.responses.ApiError;
 
-
-
-
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class InterviewExceptionHandler extends ResponseEntityExceptionHandler {

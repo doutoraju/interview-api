@@ -126,11 +126,4 @@ public class Interview implements Serializable{
 				+ interviewer + ", interviewDate=" + interviewDate + ", generalDescription=" + generalDescription
 				+ ", approved=" + approved + ", level=" + level + "]";
 	}
-	
-	/*
-	public void addSkillMapping(SkillMapping skillMapping) {
-		this.skillMapping.add(skillMapping);
-	}
-	*/
-	
 }
