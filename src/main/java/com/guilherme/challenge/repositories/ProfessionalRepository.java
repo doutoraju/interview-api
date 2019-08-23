@@ -8,5 +8,7 @@ public interface ProfessionalRepository extends JpaRepository<Professional, Long
 
 	Professional findByName(String name);
 	Professional findByCity(String city);
-
+	//Professional findByState(String city);
+	
+	
 }

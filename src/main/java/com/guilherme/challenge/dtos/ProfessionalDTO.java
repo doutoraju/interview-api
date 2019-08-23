@@ -1,13 +1,15 @@
 package com.guilherme.challenge.dtos;
 
 import java.util.Date;
-import com.guilherme.challenge.enums.State;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
+import com.guilherme.challenge.enums.State;
+
 public class ProfessionalDTO {
 
-	private Long idProfessional;
+	private long idProfessional;
 	
 	@NotEmpty(message = "A phone number should be provided")
 	private String phone;
@@ -19,12 +21,12 @@ public class ProfessionalDTO {
 	@Email(message = "Please enter a valid email")
 	private String email;
 	private String city;
+		
 	private State state;
-
 	public Long getIdProfessional() {
-		return idProfessional;
+	return idProfessional;
 	}
-	public void setIdProfessional(Long idProfessional) {
+	public void setIdProfessional(long idProfessional) {
 		this.idProfessional = idProfessional;
 	}
 	public String getPhone() {
@@ -69,4 +71,7 @@ public class ProfessionalDTO {
 	public void setState(State state) {
 		this.state = state;
 	}
+	
+	
+	
 }

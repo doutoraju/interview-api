@@ -7,7 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Possible sections under each version release are "Added", "Changed", "Removed"
 
 ## [Unreleased]
--Part 2 and 3 from Spring Challenge.
+-Part 3 from Spring Challenge.
+
+## [1.0.3] - 2019-08-23
+Added endpoints for Interview and Skill entities:
+GET all and by ID
+Post
+Put 
+Delete by ID
+
+updated the .gitignore to include the /bin folder
+
+Added some work related to the Part 3.
 
 ## [1.0.2] - 2019-08-20
 Add endpoint do list all professionals
