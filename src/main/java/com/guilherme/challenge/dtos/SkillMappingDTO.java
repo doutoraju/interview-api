@@ -17,6 +17,8 @@ public class SkillMappingDTO {
 
 	@NotNull(message="Please select a skill")
 	private Skill skill;
+
+	
 	
 	private String briefDescription;
 	
@@ -24,6 +26,8 @@ public class SkillMappingDTO {
 	@Max(5)
 	private int rate;
 
+
+	
 	public long getIdSkillMapping() {
 		return idSkillMapping;
 	}
@@ -32,7 +36,6 @@ public class SkillMappingDTO {
 		this.idSkillMapping = idSkillMapping;
 	}
 
-	
 	public Interview getInterview() {
 		return interview;
 	}

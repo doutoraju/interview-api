@@ -75,6 +75,8 @@ public class SpringChallengeApplication {
 				
 				sm.setBriefDescription("Description " + i);
 				
+		
+				
 				sm.setInterview(in);
 				
 				sm.setSkill(s);

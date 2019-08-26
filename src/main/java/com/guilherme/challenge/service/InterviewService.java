@@ -6,9 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.guilherme.challenge.dtos.InterviewDTO;
 import com.guilherme.challenge.entities.Interview;
-import com.guilherme.challenge.entities.Interview;
+import com.guilherme.challenge.entities.Professional;
 import com.guilherme.challenge.repositories.InterviewRepository;
 
 @Service
@@ -33,6 +32,12 @@ public class InterviewService {
 			
 		}
 		return null;
+	}
+	
+	public List<Interview> findInterviewByProfessional(Professional professional){
+		
+		
+		return interviewRepository.findInterviewByIdProfessional(professional);
 	}
 	
 	public Interview saveInterview(Interview interview) {

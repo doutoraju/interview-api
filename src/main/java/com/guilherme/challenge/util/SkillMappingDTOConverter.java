@@ -8,7 +8,7 @@ import com.guilherme.challenge.entities.SkillMapping;
 
 @Component
 public class SkillMappingDTOConverter {
-
+	
 	public SkillMappingDTO convertToDTO(SkillMapping skillMapping) {
 		
 		SkillMappingDTO tempSkillMapping = new SkillMappingDTO();

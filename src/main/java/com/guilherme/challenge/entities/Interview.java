@@ -58,6 +58,8 @@ public class Interview implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Level level;
 	
+	
+	
 	@OneToMany(mappedBy= "interview", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<SkillMapping> skillMapping;
@@ -126,4 +128,28 @@ public class Interview implements Serializable{
 				+ interviewer + ", interviewDate=" + interviewDate + ", generalDescription=" + generalDescription
 				+ ", approved=" + approved + ", level=" + level + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (idInterview ^ (idInterview >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Interview other = (Interview) obj;
+		if (idInterview != other.idInterview)
+			return false;
+		return true;
+	}
+	
+	
 }
