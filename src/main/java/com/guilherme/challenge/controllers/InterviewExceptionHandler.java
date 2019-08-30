@@ -15,7 +15,7 @@ import com.guilherme.challenge.responses.ApiError;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
-public class ProfessionalExceptionHandler extends ResponseEntityExceptionHandler {
+public class InterviewExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(NumberFormatException.class)
 	protected ResponseEntity<ApiError> handlebrFormatException(NumberFormatException ex) {
@@ -66,6 +66,6 @@ public class ProfessionalExceptionHandler extends ResponseEntityExceptionHandler
 
 		apiError.setExceptionDetails(ex.getMessage());
 
-		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

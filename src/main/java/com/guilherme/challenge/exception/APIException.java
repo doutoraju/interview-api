@@ -5,28 +5,29 @@ import org.springframework.validation.BindingResult;
 
 public class APIException extends Exception {
 
-    private BindingResult results;
+	private BindingResult results;
 
-    public APIException(Exception ex) {
-        this(null, ex);
-    }
+	public APIException(Exception ex) {
+		this(null, ex);
+	}
 
-    public APIException(String message) {
-        this(message, null);
-    }
+	public APIException(String message) {
+		this(message, null);
+	}
 
-    public APIException(String message, Exception ex) {
-        super(message, ex);
-        handleValidationExceptions();
-    }
+	public APIException(String message, Exception ex) {
+		super(message, ex);
+		handleValidationExpections();
+	}
 
-    public BindingResult getBindingResult() {
-        return results;
-    }
+	public BindingResult getBindingResults() {
 
-    private void handleValidationExceptions() {
-        if (getCause() != null && (getCause() instanceof BindException)) {
-            results = ((BindException) getCause()).getBindingResult();
-        }
-    }
+		return results;
+	}
+
+	private void handleValidationExpections() {
+		if (getCause() != null && (getCause() instanceof BindException)) {
+			results = ((BindException) getCause()).getBindingResult();
+		}
+	}
 }

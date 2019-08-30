@@ -1,7 +1,9 @@
 package com.guilherme.challenge.controllers;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import com.guilherme.challenge.responses.ApiError;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
-public class ProfessionalExceptionHandler extends ResponseEntityExceptionHandler {
+public class SkillMappingExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(NumberFormatException.class)
 	protected ResponseEntity<ApiError> handlebrFormatException(NumberFormatException ex) {
@@ -37,7 +39,7 @@ public class ProfessionalExceptionHandler extends ResponseEntityExceptionHandler
 	protected ResponseEntity<ApiError> handleEntityNotfound(EmptyResultDataAccessException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
-		apiError.getErrors().add("No Professional with the given ID was found.");
+		apiError.getErrors().add("No Skill Mapping with the given Skill and Interview combination was found.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
 
@@ -46,6 +48,15 @@ public class ProfessionalExceptionHandler extends ResponseEntityExceptionHandler
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("Null pointer exception.");
+		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	protected ResponseEntity<ApiError> handleConstraintException(ConstraintViolationException ex) {
+		ApiError apiError = new ApiError();
+		apiError.setExceptionDetails(ex.getMessage());
+		apiError.getErrors().add(
+				"There is already a combination of Skill and Interview saved with the details provided, try using the PUT method to update it.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
 
@@ -66,6 +77,6 @@ public class ProfessionalExceptionHandler extends ResponseEntityExceptionHandler
 
 		apiError.setExceptionDetails(ex.getMessage());
 
-		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
