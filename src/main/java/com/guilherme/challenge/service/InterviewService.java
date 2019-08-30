@@ -13,47 +13,44 @@ import com.guilherme.challenge.repositories.InterviewRepository;
 @Service
 public class InterviewService {
 
-	@Autowired	
+	@Autowired
 	private InterviewRepository interviewRepository;
-	
-	
-	public List<Interview> findAll(){
-		
+
+	public List<Interview> findAll() {
+
 		return interviewRepository.findAll();
 	}
-	
+
 	public Interview findInterviewByID(Long id) {
 		Optional<Interview> interviewOpt = interviewRepository.findById(id);
-		
-		if(interviewOpt.isPresent()) {
+
+		if (interviewOpt.isPresent()) {
 			Interview p = interviewOpt.get();
-			
+
 			return p;
-			
+
 		}
 		return null;
 	}
-	
-	public List<Interview> findInterviewByProfessional(Professional professional){
-		
-		
+
+	public List<Interview> findInterviewByProfessional(Professional professional) {
+
 		return interviewRepository.findInterviewByIdProfessional(professional);
 	}
-	
+
 	public Interview saveInterview(Interview interview) {
-		
+
 		return interviewRepository.save(interview);
 	}
-	
+
 	public void deleteInterviewById(Long id) {
-		
+
 		interviewRepository.deleteById(id);
 	}
-	
+
 	public boolean existsById(long id) {
-		
+
 		return interviewRepository.existsById(id);
 	}
-	
-	
+
 }

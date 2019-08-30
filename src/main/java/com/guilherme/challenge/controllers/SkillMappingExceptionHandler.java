@@ -15,70 +15,68 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.guilherme.challenge.exception.APIException;
 import com.guilherme.challenge.responses.ApiError;
 
-
-
-
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
 public class SkillMappingExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(NumberFormatException.class)
-	protected ResponseEntity<ApiError> handlebrFormatException(NumberFormatException ex){
+	protected ResponseEntity<ApiError> handlebrFormatException(NumberFormatException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("The ID provided is not a valid number.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(IllegalArgumentException.class)
-	protected ResponseEntity<ApiError> handleIllegaArgs(IllegalArgumentException ex){
+	protected ResponseEntity<ApiError> handleIllegaArgs(IllegalArgumentException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("Somehow a null entity was given.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(EmptyResultDataAccessException.class)
-	protected ResponseEntity<ApiError> handleEntityNotfound(EmptyResultDataAccessException ex){
+	protected ResponseEntity<ApiError> handleEntityNotfound(EmptyResultDataAccessException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("No Skill Mapping with the given Skill and Interview combination was found.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(NullPointerException.class)
-	protected ResponseEntity<ApiError> handleNull(NullPointerException ex){
+	protected ResponseEntity<ApiError> handleNull(NullPointerException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("Null pointer exception.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(ConstraintViolationException.class)
-	protected ResponseEntity<ApiError> handleConstraintException(ConstraintViolationException ex){
+	protected ResponseEntity<ApiError> handleConstraintException(ConstraintViolationException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
-		apiError.getErrors().add("There is already a combination of Skill and Interview saved with the details provided, try using the PUT method to update it.");
+		apiError.getErrors().add(
+				"There is already a combination of Skill and Interview saved with the details provided, try using the PUT method to update it.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
 
 	@ExceptionHandler(Exception.class)
-	protected ResponseEntity<ApiError> handleAllExceptions(Exception ex){
+	protected ResponseEntity<ApiError> handleAllExceptions(Exception ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add(ex.getMessage());
 		return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 	@ExceptionHandler(APIException.class)
-	public ResponseEntity<ApiError> processBindException(APIException ex){
+	public ResponseEntity<ApiError> processBindException(APIException ex) {
 		ApiError apiError = new ApiError();
 		BindingResult bindingResult = ex.getBindingResults();
-		if(bindingResult != null && bindingResult.getAllErrors() != null)
+		if (bindingResult != null && bindingResult.getAllErrors() != null)
 			ex.getBindingResults().getAllErrors().forEach(error -> apiError.getErrors().add(error.getDefaultMessage()));
-		
+
 		apiError.setExceptionDetails(ex.getMessage());
-		
+
 		return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

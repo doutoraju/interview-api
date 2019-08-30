@@ -14,15 +14,15 @@ import com.guilherme.challenge.enums.State;
 @RequestMapping("/api/states")
 public class StateController {
 
-	@GetMapping(value = "") 
-	  public ResponseEntity<List<String>>  findInterview() {
+	@GetMapping(value = "")
+	public ResponseEntity<List<String>> findInterview() {
 		List<String> estados = new ArrayList<>();
-		for(State s: State.values()) {
+		for (State s : State.values()) {
 			estados.add(s.toString());
 		}
-		
+
 		return ResponseEntity.ok(estados);
-		
-	  }
-	
+
+	}
+
 }

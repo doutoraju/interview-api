@@ -117,15 +117,16 @@ public class SkillMappingController {
 		if (result.hasErrors()) {
 			throw new APIException("Validation error found", new BindException(result));
 		}
-		SkillMapping tempSkillMapping = converter.convertToEntity(skillMappingDTO);
-		if (skillMappingService.existsSkillMappingWithInterviewAndSkill(tempSkillMapping.getInterview(),
-				tempSkillMapping.getSkill())) {
+		// SkillMapping tempSkillMapping = converter.convertToEntity(skillMappingDTO);
+		if (skillMappingService.existsSkillMappingWithInterviewAndSkill(skillMappingDTO.getInterview(),
+				skillMappingDTO.getSkill())) {
 			throw new ConstraintViolationException(
 					"There is already a combination of Skill and Interview saved with the details provided, try using the PUT method to update it.",
 					null, null);
 		}
+		skillMappingDTO.setIdSkillMapping(0);
 		SkillMappingDTO skillMappingReturned = converter
-				.convertToDTO(skillMappingService.saveSkillMapping(tempSkillMapping));
+				.convertToDTO(skillMappingService.saveSkillMapping(converter.convertToEntity(skillMappingDTO)));
 
 		return ResponseEntity.ok(skillMappingReturned);
 	}
@@ -146,6 +147,10 @@ public class SkillMappingController {
 					new BindException(result));
 		}
 
+		long idSkillMappingPersisted = skillMappingService
+				.findSkillMappingByInterviewAndSkill(skillMappingDTO.getInterview(), skillMappingDTO.getSkill())
+				.getIdSkillMapping();
+		skillMappingDTO.setIdSkillMapping(idSkillMappingPersisted);
 		SkillMappingDTO skillMappingReturned = converter
 				.convertToDTO(skillMappingService.saveSkillMapping(converter.convertToEntity(skillMappingDTO)));
 		return ResponseEntity.ok(skillMappingReturned);

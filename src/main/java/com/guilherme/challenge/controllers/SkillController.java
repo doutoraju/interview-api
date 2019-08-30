@@ -28,59 +28,64 @@ import com.guilherme.challenge.util.SkillDTOConverter;
 @RestController
 @RequestMapping("/api/skills")
 public class SkillController {
-	
+
 	@Autowired
 	private SkillService skillService;
-	
+
 	@Autowired
 	private SkillDTOConverter converter;
-	
-	@GetMapping(value = "") 
-	  public ResponseEntity<List<SkillDTO>>  findAllSkills() {
+
+	@GetMapping(value = "")
+	public ResponseEntity<List<SkillDTO>> findAllSkills() {
 		List<SkillDTO> skillDTOList = new ArrayList<SkillDTO>();
 		skillService.findAll().forEach(skill -> skillDTOList.add(converter.convertToDTO(skill)));
 		return ResponseEntity.ok(skillDTOList);
-		
-	  }
-	
-	  @GetMapping(value = "/{id}") 
-	  public ResponseEntity<SkillDTO>  findSkillById(@PathVariable("id") String id) {
-		  
-		 long idSkill  = Long.valueOf(id);  
-		 Skill s = skillService.findSkillByID(idSkill);
-		  
-		  if( s != null) {
-			  return new ResponseEntity<>(converter.convertToDTO(s), HttpStatus.OK);
-		  }else {
-			  throw new IllegalArgumentException("No Skill was found with this ID.");
-		  }
-	  }
-	 
+
+	}
+
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<SkillDTO> findSkillById(@PathVariable("id") String id) {
+
+		long idSkill = Long.valueOf(id);
+		Skill s = skillService.findSkillByID(idSkill);
+
+		if (s != null) {
+			return new ResponseEntity<>(converter.convertToDTO(s), HttpStatus.OK);
+		} else {
+			throw new IllegalArgumentException("No Skill was found with this ID.");
+		}
+	}
+
 	@PostMapping
-	public ResponseEntity<SkillDTO> saveSkill(@Valid @RequestBody SkillDTO skillDTO, BindingResult result) throws APIException{
-		if(result.hasErrors()) {
-			throw new APIException("Validation error found", new BindException(result)) ;
+	public ResponseEntity<SkillDTO> saveSkill(@Valid @RequestBody SkillDTO skillDTO, BindingResult result)
+			throws APIException {
+		if (result.hasErrors()) {
+			throw new APIException("Validation error found", new BindException(result));
 		}
-		SkillDTO skillReturned =  converter.convertToDTO(skillService.saveSkill(converter.convertToEntity(skillDTO)));
+		SkillDTO skillReturned = converter.convertToDTO(skillService.saveSkill(converter.convertToEntity(skillDTO)));
 		return ResponseEntity.ok(skillReturned);
 	}
-	
+
 	@PutMapping
-	public ResponseEntity<SkillDTO> updateSkill(@Valid @RequestBody SkillDTO skillDTO, BindingResult result) throws APIException{
-		if(result.hasErrors()) {
+	public ResponseEntity<SkillDTO> updateSkill(@Valid @RequestBody SkillDTO skillDTO, BindingResult result)
+			throws APIException {
+		if (result.hasErrors()) {
 			result.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
-			throw new APIException("Validation error found", new BindException(result)) ;
-		}else if (!skillService.existsById(skillDTO.getIdSkill())){
-			throw new APIException("No Skill was found with the given ID, if you want to save a new Skill, try using the POST method", new BindException(result));
+			throw new APIException("Validation error found", new BindException(result));
+		} else if (!skillService.existsById(skillDTO.getIdSkill())) {
+			throw new APIException(
+					"No Skill was found with the given ID, if you want to save a new Skill, try using the POST method",
+					new BindException(result));
 		}
-		
-		SkillDTO skillReturned =  converter.convertToDTO(skillService.saveSkill(converter.convertToEntity(skillDTO)));
+
+		SkillDTO skillReturned = converter.convertToDTO(skillService.saveSkill(converter.convertToEntity(skillDTO)));
 		return ResponseEntity.ok(skillReturned);
 	}
-	@DeleteMapping(value = "/{id}") 
-	public ResponseEntity<SkillDTO>  deleteSkill(@PathVariable("id") String id) {
-		  
-		long idSkill = Long.valueOf(id);  
+
+	@DeleteMapping(value = "/{id}")
+	public ResponseEntity<SkillDTO> deleteSkill(@PathVariable("id") String id) {
+
+		long idSkill = Long.valueOf(id);
 		skillService.deleteSkillById(idSkill);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

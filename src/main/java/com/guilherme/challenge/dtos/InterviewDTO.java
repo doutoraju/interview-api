@@ -9,24 +9,22 @@ import com.guilherme.challenge.entities.Professional;
 import com.guilherme.challenge.enums.Level;
 
 public class InterviewDTO {
-	
-	
+
 	private long idInterview;
-	
-	
-	@NotNull(message="Please select a professional")
+
+	@NotNull(message = "Please select a professional")
 	private Professional professional;
-	
-	@NotEmpty(message="Please specify the interviewer's name")
+
+	@NotEmpty(message = "Please specify the interviewer's name")
 	private String interviewer;
-	
-	@NotNull(message="Please set up a date for the interview")
+
+	@NotNull(message = "Please set up a date for the interview")
 	private Date interviewDate;
-	
+
 	private String generalDescription;
-	
+
 	private boolean approved;
-	
+
 	private Level level;
 
 	public long getIdInterview() {
@@ -76,9 +74,7 @@ public class InterviewDTO {
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
-	
-	
-	
+
 	public Level getLevel() {
 		return level;
 	}
@@ -93,5 +89,5 @@ public class InterviewDTO {
 				+ interviewer + ", interviewDate=" + interviewDate + ", generalDescription=" + generalDescription
 				+ ", approved=" + approved + ", level=" + level + "]";
 	}
-	
+
 }

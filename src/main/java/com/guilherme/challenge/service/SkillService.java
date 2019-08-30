@@ -13,43 +13,40 @@ import com.guilherme.challenge.repositories.SkillRepository;
 @Service
 public class SkillService {
 
-	@Autowired	
+	@Autowired
 	private SkillRepository skillRepository;
-	
-	
-	public List<Skill> findAll(){
-		
+
+	public List<Skill> findAll() {
+
 		return skillRepository.findAll();
-		
-		
+
 	}
-	
+
 	public Skill findSkillByID(Long id) {
 		Optional<Skill> skillOpt = skillRepository.findById(id);
-		
-		if(skillOpt.isPresent()) {
+
+		if (skillOpt.isPresent()) {
 			Skill p = skillOpt.get();
-			
+
 			return p;
-			
+
 		}
 		return null;
 	}
-	
+
 	public Skill saveSkill(Skill skill) {
-		
+
 		return skillRepository.save(skill);
 	}
-	
+
 	public void deleteSkillById(Long id) {
-		
+
 		skillRepository.deleteById(id);
 	}
-	
+
 	public boolean existsById(long id) {
-		
+
 		return skillRepository.existsById(id);
 	}
-	
-	
+
 }

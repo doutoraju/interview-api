@@ -8,26 +8,21 @@ import com.guilherme.challenge.entities.Interview;
 import com.guilherme.challenge.entities.Skill;
 
 public class SkillMappingDTO {
-	
-	
+
 	private long idSkillMapping;
-	
-	@NotNull(message="Please select an interview")
+
+	@NotNull(message = "Please select an interview")
 	private Interview interview;
 
-	@NotNull(message="Please select a skill")
+	@NotNull(message = "Please select a skill")
 	private Skill skill;
 
-	
-	
 	private String briefDescription;
-	
+
 	@Min(1)
 	@Max(5)
 	private int rate;
 
-
-	
 	public long getIdSkillMapping() {
 		return idSkillMapping;
 	}
@@ -67,5 +62,5 @@ public class SkillMappingDTO {
 	public void setRate(int rate) {
 		this.rate = rate;
 	}
-	
+
 }

@@ -23,49 +23,39 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.guilherme.challenge.enums.Level;
 
 @Entity
-@Table(name="interview")
-public class Interview implements Serializable{
+@Table(name = "interview")
+public class Interview implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4258560216872048523L;
 
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_interview")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_interview")
 	private long idInterview;
-	
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Professional idProfessional;
-	
-	
-	@Column(name="name_of_interviewer", nullable=false)
+
+	@Column(name = "name_of_interviewer", nullable = false)
 	private String interviewer;
-	
-	@Column(name="date_of_interview", nullable = false)
+
+	@Column(name = "date_of_interview", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date interviewDate;
-	
-	@Column(name="general_description", nullable=true)
+
+	@Column(name = "general_description", nullable = true)
 	private String generalDescription;
-	
-	@Column(name="approved")
+
+	@Column(name = "approved")
 	private boolean approved;
-	
+
 	@Enumerated(EnumType.STRING)
 	private Level level;
-	
-	
-	
-	@OneToMany(mappedBy= "interview", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "interview", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<SkillMapping> skillMapping;
-	
-	
-	
+
 	public long getIdInterview() {
 		return idInterview;
 	}
@@ -113,7 +103,7 @@ public class Interview implements Serializable{
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
-	
+
 	public Level getLevel() {
 		return level;
 	}
@@ -150,6 +140,5 @@ public class Interview implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
+
 }

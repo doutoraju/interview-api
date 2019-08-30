@@ -14,40 +14,39 @@ import com.guilherme.challenge.repositories.ProfessionalRepository;
 @Service
 public class ProfessionalService {
 
-	@Autowired	
+	@Autowired
 	private ProfessionalRepository professionalRepository;
-	
-	
-	public List<Professional> findAll(){
-		
+
+	public List<Professional> findAll() {
+
 		return professionalRepository.findAll();
 	}
-	
+
 	public Professional findProfessionalByID(Long id) {
 		Optional<Professional> professionalOpt = professionalRepository.findById(id);
-		
-		if(professionalOpt.isPresent()) {
+
+		if (professionalOpt.isPresent()) {
 			Professional p = professionalOpt.get();
-			
+
 			return p;
-			
+
 		}
 		return null;
 	}
-	
+
 	public Professional saveProfessional(Professional professional) {
-		
+
 		return professionalRepository.save(professional);
 	}
-	
+
 	public void deleteProfessionalById(long id) {
-		
+
 		professionalRepository.deleteById(id);
 	}
-	
+
 	public boolean existsById(long id) {
-		
+
 		return professionalRepository.existsById(id);
 	}
-	
+
 }

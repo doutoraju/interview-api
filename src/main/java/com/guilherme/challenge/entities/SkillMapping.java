@@ -15,34 +15,31 @@ import javax.persistence.UniqueConstraint;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="skill_mapping", uniqueConstraints={@UniqueConstraint(columnNames={"interview", "skill"})})
-public class SkillMapping implements Serializable{
-	
+@Table(name = "skill_mapping", uniqueConstraints = { @UniqueConstraint(columnNames = { "interview", "skill" }) })
+public class SkillMapping implements Serializable {
+
 	private static final long serialVersionUID = 1357299443004285202L;
-	
-	
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_skill_mapping")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_skill_mapping")
 	@JsonIgnore
 	private long idSkillMapping;
-	
+
 	@ManyToOne
-	@JoinColumn(name="interview")
+	@JoinColumn(name = "interview")
 	private Interview interview;
 
 	@ManyToOne
-	@JoinColumn(name="skill")
+	@JoinColumn(name = "skill")
 	private Skill skill;
-	
-	@Column(name="rate")
+
+	@Column(name = "rate")
 	private int rate;
-	
-	@Column(name="brief_description")
+
+	@Column(name = "brief_description")
 	private String briefDescription;
-	
-	
+
 	public long getIdSkillMapping() {
 		return idSkillMapping;
 	}
@@ -50,7 +47,7 @@ public class SkillMapping implements Serializable{
 	public void setIdSkillMapping(long idSkillMapping) {
 		this.idSkillMapping = idSkillMapping;
 	}
-	
+
 	public Interview getInterview() {
 		return interview;
 	}
@@ -67,14 +64,9 @@ public class SkillMapping implements Serializable{
 		this.skill = skill;
 	}
 
-	
-	
-	
 	public String getBriefDescription() {
 		return briefDescription;
 	}
-
-
 
 	public void setBriefDescription(String briefDescription) {
 		this.briefDescription = briefDescription;
@@ -93,6 +85,5 @@ public class SkillMapping implements Serializable{
 		return "SkillMapping [idSkillMapping=" + idSkillMapping + ", interview=" + interview + ", skill=" + skill
 				+ ", briefDescription=" + briefDescription + ", rate=" + rate + "]";
 	}
-	
-	
+
 }

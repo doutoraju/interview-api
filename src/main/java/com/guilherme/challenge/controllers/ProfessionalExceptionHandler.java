@@ -18,54 +18,54 @@ import com.guilherme.challenge.responses.ApiError;
 public class ProfessionalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(NumberFormatException.class)
-	protected ResponseEntity<ApiError> handlebrFormatException(NumberFormatException ex){
+	protected ResponseEntity<ApiError> handlebrFormatException(NumberFormatException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("The ID provided is not a valid number.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(IllegalArgumentException.class)
-	protected ResponseEntity<ApiError> handleIllegaArgs(IllegalArgumentException ex){
+	protected ResponseEntity<ApiError> handleIllegaArgs(IllegalArgumentException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("Somehow a null entity was given.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(EmptyResultDataAccessException.class)
-	protected ResponseEntity<ApiError> handleEntityNotfound(EmptyResultDataAccessException ex){
+	protected ResponseEntity<ApiError> handleEntityNotfound(EmptyResultDataAccessException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("No Professional with the given ID was found.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(NullPointerException.class)
-	protected ResponseEntity<ApiError> handleNull(NullPointerException ex){
+	protected ResponseEntity<ApiError> handleNull(NullPointerException ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add("Null pointer exception.");
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
-	
+
 	@ExceptionHandler(Exception.class)
-	protected ResponseEntity<ApiError> handleAllExceptions(Exception ex){
+	protected ResponseEntity<ApiError> handleAllExceptions(Exception ex) {
 		ApiError apiError = new ApiError();
 		apiError.setExceptionDetails(ex.getMessage());
 		apiError.getErrors().add(ex.getMessage());
 		return new ResponseEntity<>(apiError, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 	@ExceptionHandler(APIException.class)
-	public ResponseEntity<ApiError> processBindException(APIException ex){
+	public ResponseEntity<ApiError> processBindException(APIException ex) {
 		ApiError apiError = new ApiError();
 		BindingResult bindingResult = ex.getBindingResults();
-		if(bindingResult != null && bindingResult.getAllErrors() != null)
+		if (bindingResult != null && bindingResult.getAllErrors() != null)
 			ex.getBindingResults().getAllErrors().forEach(error -> apiError.getErrors().add(error.getDefaultMessage()));
-		
+
 		apiError.setExceptionDetails(ex.getMessage());
-		
+
 		return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
 	}
 }

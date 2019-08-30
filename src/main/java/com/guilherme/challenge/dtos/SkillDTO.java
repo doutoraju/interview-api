@@ -2,13 +2,12 @@ package com.guilherme.challenge.dtos;
 
 public class SkillDTO {
 
-	
 	private long idSkill;
-	
+
 	private String name;
-	
+
 	private String description;
-	
+
 	private boolean enabled;
 
 	public long getIdSkill() {
@@ -48,6 +47,5 @@ public class SkillDTO {
 		return "Skill [idSkill=" + idSkill + ", name=" + name + ", description=" + description + ", enabled=" + enabled
 				+ "]";
 	}
-	
-	
+
 }

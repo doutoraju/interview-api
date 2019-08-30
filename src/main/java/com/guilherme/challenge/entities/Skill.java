@@ -16,30 +16,26 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name="skill")
-public class Skill implements Serializable{
+@Table(name = "skill")
+public class Skill implements Serializable {
 
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5713852525182648816L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long idSkill;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String name;
-	
+
 	private String description;
-	
+
 	private boolean enabled;
-	
-	@OneToMany(mappedBy= "skill", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "skill", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<SkillMapping> skillMapping;
-	
+
 	public long getIdSkill() {
 		return idSkill;
 	}
@@ -100,6 +96,4 @@ public class Skill implements Serializable{
 		return true;
 	}
 
-	
-	
 }
